@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Dosti Chatbot</title>
+  <style>
+    :root {
+      --bot-color: #d5b3f5;
+      --user-color: #b37bd6;
+      --bg-gradient: linear-gradient(135deg, #e4ccff, #f5e3ff);
+      --purple-dark: #7f44c0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 420px;
+      height: 650px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-header {
+      background-color: var(--purple-dark);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 2px solid #e1d3ff;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #faf6ff;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-end;
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: 20px;
+      animation: popin 0.3s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .message.bot {
+      background-color: var(--bot-color);
+      align-self: flex-start;
+    }
+
+    .message.user {
+      background-color: var(--user-color);
+      align-self: flex-end;
+      color: white;
+    }
+
+    .message img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin: 0 10px;
+    }
+
+    .message.bot img {
+      order: -1;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      font-size: 16px;
+      border-radius: 0 0 0 20px;
+      outline: none;
+    }
+
+    .chat-input button {
+      background-color: var(--purple-dark);
+      color: white;
+      border: none;
+      padding: 0 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 0 0 20px 0;
+    }
+
+    @keyframes popin {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scrollbar */
+    .chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
+    .chat-box::-webkit-scrollbar-thumb {
+      background: #caa4e3;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Daily Dosti 💬</div>
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot Avatar">
+        <div>Hey there! I’m your DostiBot 🌈 How can I help today?</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function getBotReply(input) {
+      const msg = input.toLowerCase();
+
+      if (msg.includes("hello") || msg.includes("hi")) {
+        return "Hi there! 😊 What can I do for you today?";
+      } else if (msg.includes("food")) {
+        return "We have snacks, meals, and desserts 🍱. What are you craving?";
+      } else if (msg.includes("bye")) {
+        return "Goodbye! Come back soon 💜";
+      } else if (msg.includes("thank")) {
+        return "You're always welcome! 🌸";
+      } else if (msg.includes("price") || msg.includes("cost")) {
+        return "Prices vary by item. Could you tell me what you're looking for?";
+      } else if (msg.includes("discount") || msg.includes("offer")) {
+        return "Yes! We offer great deals every Friday 🛍️";
+      } else {
+        return "Hmm... I'm still learning. Try rephrasing that?";
+      }
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const chatBox = document.getElementById("chat-box");
+
+      // User message
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.innerHTML = `
+        <div>${msg}</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712105.png" alt="User Avatar">
+      `;
+      chatBox.appendChild(userMsg);
+
+      input.value = "";
+
+      setTimeout(() => {
+        const reply = getBotReply(msg);
+        const botMsg = document.createElement("div");
+        botMsg.className = "message bot";
+        botMsg.innerHTML = `
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot Avatar">
+          <div>${reply}</div>
+        `;
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 600);
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>

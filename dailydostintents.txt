@@ -1,0 +1,41 @@
+[
+  {
+    "intent": "greet",
+    "examples": [
+      "Hi", "Hello", "Hey there", "Good morning", "What's up?", "Howdy",
+      "Yo", "Hi buddy", "Hello there!", "Good to see you", "Hey, how’s it going?",
+      "Hi, I need some help", "Hello! Is anyone there?", "Hey, Daily Dosti", "Hi assistant"
+    ],
+    "responses": [
+      "Hello! How can I assist you today?",
+      "Hi there! Looking for something special?",
+      "Welcome to Daily Dosti! What can I help you with?"
+    ]
+  },
+  {
+    "intent": "goodbye",
+    "examples": [
+      "Bye", "See you", "Good night", "Talk to you later", "Catch you later",
+      "Farewell", "I’m leaving now", "Bye bye", "See you soon", "Goodbye friend",
+      "Take care", "Later", "Have a nice day", "See ya"
+    ],
+    "responses": [
+      "Goodbye! Have a great day!",
+      "See you soon at Daily Dosti!",
+      "Take care! Come back soon."
+    ]
+  },
+  {
+    "intent": "thank_you",
+    "examples": [
+      "Thanks", "Thank you", "Much appreciated", "Thanks a lot",
+      "Thanks so much", "Thank you very much", "Thanks a ton", "Thank you kindly",
+      "Thanks a bunch", "Thanks for your help", "Many thanks", "Cheers", "I appreciate it"
+    ],
+    "responses": [
+      "You're welcome!",
+      "Glad I could help!",
+      "Always here for you!"
+    ]
+  }
+]
